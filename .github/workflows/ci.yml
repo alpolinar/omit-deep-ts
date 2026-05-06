@@ -19,6 +19,9 @@ jobs:
       - name: Setup mise
         uses: jdx/mise-action@v2
 
+      - name: Install dependencies
+        run: pnpm install
+
       - name: Run linter
         run: pnpm run lint
 
@@ -44,6 +47,9 @@ jobs:
 
       - name: Setup mise
         uses: jdx/mise-action@v2
+
+      - name: Install dependencies
+        run: pnpm install
 
       - name: Publish to NPM
         run: pnpm publish --provenance --no-git-checks
