@@ -30,3 +30,20 @@ jobs:
 
       - name: Build project
         run: pnpm run build
+
+  publish:
+    needs: build-and-test
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup mise
+        uses: jdx/mise-action@v2
+
+      - name: Publish to NPM
+        run: pnpm publish --provenance --no-git-checks
